@@ -74,7 +74,19 @@ const MyComponent: React.FC = () => {
             .withHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU5JU1RSQVRPUiIsImZ1bGxOYW1lIjoi0JjRgNCx0LjRgtGB0LrQuNC5INCY0LvRjNGPINCh0LXRgNCz0LXQtdCy0LjRhyIsInN1YiI6InVzZXJuYW1lMyIsImlhdCI6MTcwMDMxMzUyNSwiZXhwIjoxNzAwOTE4MzI1fQ.9WV0PBzZvNnTk5DGYz2f7Oq6ZG-Sn1ImiQH4NNtizIs')
             .build();
 
-        const response = await apiService.get<Booking>('/api/bookings/12');
+        const response = await apiService.get<Booking>('/api/bookings/112');
+
+        if (response.isLoading) {
+            // Handle loading state (e.g., show a loading spinner)
+            console.log('Loading...');
+        } else {
+            // Check for errors and handle the result
+            if (response.isError) {
+                console.error('Error:', response.error?.detail);
+            } else {
+                console.log('Data:', response.data);
+            }
+        }
         setApiResult(response);
     };
 

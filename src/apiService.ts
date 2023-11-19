@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import {useState} from "react";
 
 export interface Error {
     type: string;
@@ -68,8 +69,10 @@ class ApiService {
         params?: any,
         additionalHeaders?: Record<string, string>[]
     ): Promise<ApiResult<T>> {
+        const [isLoading, setIsLoading] = useState(true);
+
         const result: ApiResult<T> = {
-            isLoading: true,
+            isLoading,
             isError: false,
             data: null,
             error: undefined,
@@ -89,13 +92,17 @@ class ApiService {
                 headers,
             };
 
+            console.log('Before request' + JSON.stringify(result));
             const response = await this.request<T>(config);
+            console.log('After request' + JSON.stringify(result));
+
             result.data = response.data;
         } catch (error: any) {
             result.isError = true;
             result.error = error.response ? error.response.data : { detail: error.message };
         } finally {
-            result.isLoading = false;
+            setIsLoading(false);
+            console.log('Finally block' + JSON.stringify(result));
         }
         return result;
     }
