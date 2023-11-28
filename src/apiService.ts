@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import {useState} from "react";
 
 export interface Error {
     type: string;
@@ -18,6 +17,9 @@ export interface ApiResult<T> {
 }
 
 class ApiService {
+    static INITIAL_STATE : ApiResult<any> = {isLoading: false, isError: false, data: null, error: undefined};
+    static PREREQUEST_STATE : ApiResult<any> = {isLoading: true, isError: false, data: null, error: undefined};
+
     private readonly baseURL: string;
     private headers: Record<string, string>[] = [];
 
@@ -33,7 +35,6 @@ class ApiService {
         this.headers.push(...headers);
         return this;
     }
-
     private async request<T>(
         config: AxiosRequestConfig
     ): Promise<AxiosResponse<T>> {
@@ -69,10 +70,8 @@ class ApiService {
         params?: any,
         additionalHeaders?: Record<string, string>[]
     ): Promise<ApiResult<T>> {
-        const [isLoading, setIsLoading] = useState(true);
-
         const result: ApiResult<T> = {
-            isLoading,
+            isLoading: true,
             isError: false,
             data: null,
             error: undefined,
@@ -101,7 +100,7 @@ class ApiService {
             result.isError = true;
             result.error = error.response ? error.response.data : { detail: error.message };
         } finally {
-            setIsLoading(false);
+            result.isLoading = false;
             console.log('Finally block' + JSON.stringify(result));
         }
         return result;

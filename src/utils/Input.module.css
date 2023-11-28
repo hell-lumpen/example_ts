@@ -1,0 +1,43 @@
+.inputContainer {
+    position: relative;
+    width: 100%;
+}
+
+.validInput {
+    width: 100%;
+    padding: 10px 30px 10px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+.invalidInput {
+    border: 1px solid #fc5220;
+}
+
+.invalidInput:focus {
+    border-color: red;
+}
+
+.clearButton {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin: 0;
+    padding: 10px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #999;
+
+    @media (min-width: 600px) {
+        font-size: 28px;
+    }
+}

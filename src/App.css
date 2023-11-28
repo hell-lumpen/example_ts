@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
+.container {
+    display: flex;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.left-column {
+    /*flex: 1;*/
+    /*width: 17%;*/
+    /*max-width: 200px;*/
+    width: 150px;
+    background-color: #f0f0f0;
+    position: fixed;
+    top: 0;
+    left:0;
+    height: 100vh;
+    z-index: -1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.middle-column {
+    /*position: relative;*/
+
+
+    /*flex: 2;*/
+    /*min-width: 500px;*/
+    /*max-width: 900px;*/
+    margin-left: 150px;
+    width: 60%;
+    background-color: #d3d3d3;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.right-column {
+    /*position: relative;*/
+
+
+    /*flex: 2;*/
+    /*min-width: 330px;*/
+    width: 40%;
+    background-color: #c0c0c0;
 }
 
-.App-link {
-  color: #61dafb;
+.left-column,
+.middle-column,
+.right-column {
+    box-sizing: border-box;
+    padding: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.booking-control-container {
+    height: 150px;
+    background-color: #b2b2b2;
+}
+
+.search-input-button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-unit {
+    cursor: pointer;
+    border: none;
+    background-color: #f3adad;
 }
