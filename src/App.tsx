@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import BookingList from "./BookingCard/BookingList";
+import {BookingDetail, BookingRoom} from "./models/bookingModels";
+import Input from "./utils/Input";
+import BookingDetailCard from "./BookingCard/BookingDetailsCard";
+import {AddingBookingContainer} from "./AddBookingContainer/AddingBookingContainer";
 import {BookingDetail} from "./models/bookingModels";
 import LoginForm from "./LoginForm/LoginForm";
 import TokenViewer from "./LoginForm/TokenViewer";
@@ -98,6 +102,11 @@ const App: React.FC = () => {
             </div>
             <div className='middle-column'>
                 <h1>Бронирования</h1>
+                <AddingBookingContainer/>
+
+
+                <BookingDetailCard {...bookingDetail}/>
+                <BookingList bookingsGropedByRoom={bookingData}/>
                 {!authenticatedUser && (
                     <LoginForm/>
                 )}

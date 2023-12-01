@@ -1,0 +1,157 @@
+.new-booking-container {
+    position: relative;
+    /*box-sizing: border-box;*/
+    background: white;
+    padding: 15px 5px;
+    border-radius: 13px;
+    font-family: 'Geologica', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    width: 370px;
+    height: 300px;
+    max-height: 80vh;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new-booking-selectBox {
+    border: 1px solid rgba(175, 175, 175, 0.5);
+
+}
+
+.new-booking-datetime-date{
+    margin-top: 2%;
+}
+
+.new-booking-room{
+    /*font-weight: 500;*/
+    margin-top: 3%;
+}
+
+.new-booking-selectBox{
+    font-size: 14px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.new-booking-datetime {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    margin-top: 2%;
+
+    width: 90%;
+}
+
+.new-booking-datetime-element {
+    width: 30%;
+}
+
+
+.new-booking-button-accept{
+    background: #2180D6;
+    color: #fff;
+}
+
+.new-booking-button-accept:hover{
+    background: #1F77C7;
+}
+
+.new-booking-button-cancel{
+    background: #EEEEEE;
+}
+
+.new-booking-button-cancel:hover{
+    background: #DDDDDD;
+}
+
+.new-booking-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /*background: red;*/
+    width: 70%;
+
+}
+
+.new-booking-buttons button{
+    border-radius: 8px;
+    font-size: 16px;
+    border: 1px solid #CCCCCC;
+
+}
+
+@media (max-width: 690px) {
+    .new-booking-datetime-container {
+        flex-direction: column;
+    }
+    .new-booking-datetime-element {
+        width: 100%;
+    }
+}
+
+
+.new-booking-form-datetime-element-label {
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    height: 4em;
+}
+
+.new-booking-form-label {
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.new-booking-form-textarea {
+    width: 100%;
+    height: 3em;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Geologica', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: left;
+    border: 1px solid rgba(175, 175, 175, 0.5);
+    box-shadow: none;
+    resize: none;
+}
+
+.new-booking-form-textarea:focus {
+    box-shadow: none;
+    outline: none;
+    border: 1px solid rgba(175, 175, 175, 0.5);
+}
+
+
+.new-booking-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.new-booking-buttons-cancel,
+.new-booking-buttons-accept {
+    background: none;
+    border: none;
+    font-family: 'Geologica', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.new-booking-buttons-cancel {
+    color: #0095DA;
+}
+
+.new-booking-buttons-accept {
+    color: black;
+}
