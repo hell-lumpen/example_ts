@@ -1,19 +1,27 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import styles from './LoginForm.module.css';
-import {UserCredentials} from "../models/AuthenticatedUser";
+import {AuthenticatedUser, UserCredentials} from "../models/AuthenticatedUser";
+import {login} from "../services/authService";
+import {useNotificationState} from "../contexts/notificationContext";
+import {NotificationType} from "../models/NotificationModel";
+import {useAuthenticatedUserState} from "../contexts/authenticatedUserContext";
+
 
 interface LoginFormProps {
-    setAuthenticatedUserToken: Dispatch<SetStateAction<string | undefined>>,
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({setAuthenticatedUserToken}) => {
+const LoginForm: React.FC<LoginFormProps> = () => {
+    const [authenticatedUser, setAuthenticatedUser] = useAuthenticatedUserState();
+
+    const {setNotification} = useNotificationState();
     const [successAuth, setSuccessAuth] = useState(true);
     const [credentials, setCredentials] = useState<UserCredentials>({
         username: '',
         password: '',
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSuccessAuth(true);
         const {name, value} = e.target;
         setCredentials((prevCredentials) => ({
             ...prevCredentials,
@@ -21,29 +29,39 @@ const LoginForm: React.FC<LoginFormProps> = ({setAuthenticatedUserToken}) => {
         }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+
+    const handleUserLoginButtonClick = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Отправлены следующие учетные данные:', credentials);
-        if (credentials.username !== '123') {
-            setSuccessAuth(false);
-            setCredentials({username: '', password: ''})
-        }
-        else {
-            setSuccessAuth(true);
-            setAuthenticatedUserToken(credentials.username + credentials.password);
+
+        try {
+            const user = await login(credentials);
+            setAuthenticatedUser(user);
+
+            setNotification({
+                type: NotificationType.INFO,
+                title: 'Успешный вход',
+                message: ''
+            });
+        } catch (error: any) {
+            setNotification({
+                type: NotificationType.ERROR,
+                title: 'Произошла ошибка во время авторизации',
+                message: error.message
+            });
         }
     };
 
+
     return (
-        <div className={styles.container}>
-            <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.loginContainer}>
+            <form onSubmit={handleUserLoginButtonClick} className={styles.form}>
                 <label>
                     Логин:
                     <input
                         type="text"
                         name="username"
                         value={credentials.username}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         className={styles.input}
                     />
                 </label>
@@ -53,13 +71,13 @@ const LoginForm: React.FC<LoginFormProps> = ({setAuthenticatedUserToken}) => {
                         type="password"
                         name="password"
                         value={credentials.password}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         className={styles.input}
                     />
                 </label>
                 {!successAuth && (
-                    <p style={{color: "red"}}>
-                        Ошибка аутентификации: неверный логин или пароль
+                    <p className={styles.error}>
+                        Ошибка аутентификации
                     </p>
                 )}
                 <button type="submit" className={styles.button}>

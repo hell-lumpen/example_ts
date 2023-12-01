@@ -1,11 +1,19 @@
 import React from 'react';
-import {useAuthenticatedUser} from "../contexts/authenticatedUserContext";
+import {useAuthenticatedUserState} from "../contexts/authenticatedUserContext";
+import {useNotificationState} from "../contexts/notificationContext";
 
 const TokenViewer = () => {
-    const token = useAuthenticatedUser();
+    const [user, setUser] = useAuthenticatedUserState();
+    const {notification} = useNotificationState();
     return (
         <div>
-            Token: {token}
+            User: {JSON.stringify(user, null, 2)}
+            <br/>
+            {notification.message && (
+                <div>
+                    Notification: {notification.message}
+                </div>
+            )}
         </div>
     );
 };

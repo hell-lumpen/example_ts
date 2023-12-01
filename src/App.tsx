@@ -1,10 +1,11 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import BookingList from "./BookingCard/BookingList";
 import {BookingDetail} from "./models/bookingModels";
 import LoginForm from "./LoginForm/LoginForm";
 import TokenViewer from "./LoginForm/TokenViewer";
-import {authenticatedUserContext} from "./contexts/authenticatedUserContext";
+import {useAuthenticatedUserState} from "./contexts/authenticatedUserContext";
+import {getToken, restoreAuthUserFromJWT} from "./services/authService";
 
 
 const App: React.FC = () => {
@@ -78,27 +79,28 @@ const App: React.FC = () => {
         tags: [{label: 'Бизнес', color: '#ffa07a'}, {label: 'Образование', color: '#98fb98'}],
     }
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log('Input value changed:', e.target.value);
-    };
+    const [authenticatedUser, setAuthenticatedUser] = useAuthenticatedUserState();
 
-    const isValid = (value: string) => {
-        // Пример простой валидации: значение не должно быть пустым
-        return value.trim() !== '';
-    };
+    useEffect(() => {
+        const token = getToken()
+        if (!token) {
+            console.log('Need login');
+            return
+        }
+        setAuthenticatedUser(restoreAuthUserFromJWT(token));
+    }, [])
 
-    const [inputValue, setInputValue] = useState('');
-    const [authenticatedUserToken, setAuthenticatedUserTokenToken] = useState<string | undefined>(undefined);
-
-    return (<div className='container'>
-        <authenticatedUserContext.Provider value={authenticatedUserToken}>
+    return (
+        <div className='container'>
             <div className='left-column'>
                 <h1>Навигационное меню</h1>
                 <p>Content goes here</p>
             </div>
             <div className='middle-column'>
                 <h1>Бронирования</h1>
-                <LoginForm setAuthenticatedUserToken={setAuthenticatedUserTokenToken}/>
+                {!authenticatedUser && (
+                    <LoginForm/>
+                )}
                 <BookingList bookingsGropedByRoom={cardsData}/>
             </div>
             <div className='right-column'>
@@ -106,8 +108,8 @@ const App: React.FC = () => {
                 <p>Content goes here</p>
                 <TokenViewer/>
             </div>
-        </authenticatedUserContext.Provider>
-    </div>);
+        </div>
+    );
 };
 
 export default App;

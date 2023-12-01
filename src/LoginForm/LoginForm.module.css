@@ -1,4 +1,4 @@
-.container {
+.loginContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,4 +28,8 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.error {
+    color: red;
 }
