@@ -1,11 +1,9 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import BookingList from "./BookingCard/BookingList";
-import {BookingDetail, BookingRoom} from "./models/bookingModels";
-import Input from "./utils/Input";
+import {BookingDetail} from "./models/bookingModels";
 import BookingDetailCard from "./BookingCard/BookingDetailsCard";
 import {AddingBookingContainer} from "./AddBookingContainer/AddingBookingContainer";
-import {BookingDetail} from "./models/bookingModels";
 import LoginForm from "./LoginForm/LoginForm";
 import TokenViewer from "./LoginForm/TokenViewer";
 import {useAuthenticatedUserState} from "./contexts/authenticatedUserContext";
@@ -106,7 +104,7 @@ const App: React.FC = () => {
 
 
                 <BookingDetailCard {...bookingDetail}/>
-                <BookingList bookingsGropedByRoom={bookingData}/>
+                <BookingList bookingsGropedByRoom={cardsData}/>
                 {!authenticatedUser && (
                     <LoginForm/>
                 )}
