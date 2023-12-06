@@ -75,130 +75,16 @@ const App: React.FC = () => {
             ],
         },];
 
-    const cardsData: BookingRoom[] = [
-        {
-            roomName: 'Лекторий IT-5',
-            bookings: [
-                {
-                    id: 1,
-                    startTime: '10:00',
-                    endTime: '12:00',
-                    title: 'Введение в авиационную и ракетнокосмическую технику',
-                    owner: 'Иванов Иван Иванович',
-                    tags: [{id: 1, label: 'Техника', color: '#add8e6', shortLabel: 'Т'}, {
-                        id: 2,
-                        label: 'Образование',
-                        color: '#98fb98',
-                        shortLabel: 'О'
-                    }],
-                },
-            ],
-        },
-        {
-            roomName: 'Conference Room A',
-            bookings: [
-                {
-                    id: 2,
-                    startTime: '14:30',
-                    endTime: '16:00',
-                    title: 'Митап по React',
-                    owner: 'Анна Сидорова',
-                    tags: [{id: 3, label: 'React', color: '#87ceeb', shortLabel: 'R'}, {
-                        id: 4,
-                        label: 'Образование',
-                        color: '#98fb98',
-                        shortLabel: 'О'
-                    }],
-                },
-            ],
-        },
-        {
-            roomName: 'Meeting Room 2',
-            bookings: [
-                {
-                    id: 5,
-                    startTime: '09:00',
-                    endTime: '10:30',
-                    title: 'Презентация нового продукта',
-                    owner: 'Петр Петрович',
-                    tags: [{id: 6, label: 'Продукт', color: '#b0e0e6', shortLabel: 'П'}],
-                },
-            ],
-        },
-        {
-            roomName: 'Training Room 1',
-            bookings: [
-                {
-                    id: 7,
-                    startTime: '13:00',
-                    endTime: '15:00',
-                    title: 'Обучение по Python',
-                    owner: 'Елена Иванова',
-                    tags: [{id: 8, label: 'Python', color: '#add8e6', shortLabel: 'P'}, {
-                        id: 9,
-                        label: 'Образование',
-                        color: '#98fb98',
-                        shortLabel: 'О'
-                    }],
-                },
-            ],
-        },
-        {
-            roomName: 'Innovation Center',
-            bookings: [
-                {
-                    id: 10,
-                    startTime: '16:30',
-                    endTime: '18:00',
-                    title: 'Демонстрация новых технологий',
-                    owner: 'Мария Мариева',
-                    tags: [{id: 11, label: 'Технологии', color: '#ffd700', shortLabel: 'Т'}],
-                },
-            ],
-        },
-        {
-            roomName: 'Business Lounge',
-            bookings: [
-                {
-                    id: 12,
-                    startTime: '10:30',
-                    endTime: '12:30',
-                    title: 'Бизнес-форум: Успех в цифровую эпоху',
-                    owner: 'Артем Артемов',
-                    tags: [{id: 13, label: 'Бизнес', color: '#ffa07a', shortLabel: 'Б'}, {
-                        id: 14,
-                        label: 'Образование',
-                        color: '#98fb98',
-                        shortLabel: 'О'
-                    }],
-                },
-                {
-                    id: 15,
-                    startTime: '14:00',
-                    endTime: '15:30',
-                    title: 'Развитие бизнеса в онлайн среде',
-                    owner: 'Ольга Олегова',
-                    tags: [{id: 16, label: 'Бизнес', color: '#ffa07a', shortLabel: 'Б'}, {
-                        id: 17,
-                        label: 'Образование',
-                        color: '#98fb98',
-                        shortLabel: 'О'
-                    }],
-                },
-            ],
-        },
-    ];
-
-    const bookingDetail: BookingDetail = {
-        startTime: '14:00',
-        endTime: '15:30',
-        room: 'Погосян',
-        title: 'Развитие бизнеса в онлайн среде',
-        descriptions: 'Добро пожаловать на волнующее мероприятие, посвященное Развитию Бизнеса в Онлайн Среде! Здесь каждый участник обнаружит ключевые стратегии и инновационные подходы к успешному ведению бизнеса в цифровую эпоху. Погружаемся в мир виртуальных возможностей, делимся опытом с лучшими экспертами и создаем путь к успеху в онлайн пространстве. Готовы ли вы преобразить свой бизнес и поднять его на новый уровень? Присоединяйтесь к нам и давайте вместе писать историю цифрового успеха!',
-        owner: 'Ольга Олегова',
-        participants: ['Иванов Иван Иванович', 'Иванова Ивана Ивановна', 'М8О-410Б-20', 'М8О-411Б-20'],
-        tags: [{label: 'Бизнес', color: '#ffa07a'}, {label: 'Образование', color: '#98fb98'}],
-    }
+    // const bookingDetail: BookingDetail = {
+    //     startTime: '14:00',
+    //     endTime: '15:30',
+    //     room: 'Погосян',
+    //     title: 'Развитие бизнеса в онлайн среде',
+    //     descriptions: 'Добро пожаловать на волнующее мероприятие, посвященное Развитию Бизнеса в Онлайн Среде! Здесь каждый участник обнаружит ключевые стратегии и инновационные подходы к успешному ведению бизнеса в цифровую эпоху. Погружаемся в мир виртуальных возможностей, делимся опытом с лучшими экспертами и создаем путь к успеху в онлайн пространстве. Готовы ли вы преобразить свой бизнес и поднять его на новый уровень? Присоединяйтесь к нам и давайте вместе писать историю цифрового успеха!',
+    //     owner: 'Ольга Олегова',
+    //     participants: ['Иванов Иван Иванович', 'Иванова Ивана Ивановна', 'М8О-410Б-20', 'М8О-411Б-20'],
+    //     tags: [{label: 'Бизнес', color: '#ffa07a'}, {label: 'Образование', color: '#98fb98'}],
+    // }
 
     const [authenticatedUser, setAuthenticatedUser] = useAuthenticatedUserState();
 
@@ -221,8 +107,8 @@ const App: React.FC = () => {
                 <AddingBookingContainer/>
 
 
-                <BookingDetailCard {...bookingDetail}/>
-                <BookingList bookingsGropedByRoom={cardsData}/>
+                {/*<BookingDetailCard {...bookingDetail}/>*/}
+                <BookingList bookingsGropedByRoom={sampleBookings}/>
                 {!authenticatedUser ? (
                     <>
                         <h2>Авторизация</h2>
