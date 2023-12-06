@@ -1,35 +1,16 @@
-import React, { ReactNode, useEffect, useState } from "react";
-import { Notification, NotificationState } from "../../models/NotificationModel";
-import { NotificationContext } from "../notificationContext";
+import React, {ReactNode, useState} from "react";
+import {NotificationContext} from "../notificationContext";
+import {CustomNotification} from '../../models/NotificationModel';
 
 interface NotificationProviderProps {
     children: ReactNode;
 }
 
-export const NotificationProvider: React.FC<NotificationProviderProps> = ({ children }) => {
-    const [currentNotification, setCurrentNotification] = useState<Notification>({
-        type: undefined,
-        title: undefined,
-        message: undefined,
-    });
-
-    const clearNotification = () => {
-        setCurrentNotification({ type: undefined, title: undefined, message: undefined });
-    };
-
-    useEffect(() => {
-        const clearNotificationTimeoutId = setTimeout(clearNotification, 5000);
-
-        return () => clearTimeout(clearNotificationTimeoutId);
-    }, [currentNotification]);
-
-    const notificationContextValue: NotificationState = {
-        notification: currentNotification,
-        setNotification: setCurrentNotification,
-    };
+export const NotificationProvider: React.FC<NotificationProviderProps> = ({children}) => {
+    const notificationState = useState<CustomNotification | undefined>(undefined);
 
     return (
-        <NotificationContext.Provider value={notificationContextValue}>
+        <NotificationContext.Provider value={notificationState}>
             {children}
         </NotificationContext.Provider>
     );

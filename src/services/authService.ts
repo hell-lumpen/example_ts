@@ -21,6 +21,10 @@ export function getToken(): string | null {
     return localStorage.getItem(LC_TOKEN_KEY);
 }
 
+export function deleteToken() {
+    return localStorage.removeItem(LC_TOKEN_KEY);
+}
+
 export async function login(credentials: UserCredentials): Promise<AuthenticatedUser> {
     console.log('Login request ' + JSON.stringify(credentials))
     return axios.post('http://localhost:8080/api/auth/login', credentials)
@@ -58,7 +62,7 @@ export async function login(credentials: UserCredentials): Promise<Authenticated
 export function restoreAuthUserFromJWT(): AuthenticatedUser;
 export function restoreAuthUserFromJWT(jwt: string): AuthenticatedUser;
 
-export function restoreAuthUserFromJWT(jwt?: string): AuthenticatedUser {
+export function restoreAuthUserFromJWT(jwt?: string): AuthenticatedUser | undefined {
 
     function decode(jwt: string): JwtCustomPayload {
         return jwtDecode<JwtCustomPayload>(jwt);
@@ -67,10 +71,10 @@ export function restoreAuthUserFromJWT(jwt?: string): AuthenticatedUser {
     let decodedToken: JwtCustomPayload | null = null;
 
     if (jwt === undefined) {
-        // const token = getToken()
-        const jwt = 'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU5JU1RSQVRPUiIsImZ1bGxOYW1lIjoi0J3QtdC90LDRhdC-0LIg0JXQstCz0LXQvdC40Lkg0JLQsNC70LXQvdGC0LjQvdC-0LLQuNGHIiwic3ViIjoidXNlcm5hbWUiLCJpYXQiOjE3MDEyNTY1MTEsImV4cCI6MTcwMTg2MTMxMX0.37Gxjhsr-5S--N2rnK93d5qJ1grhdNK10_hqaXcC3xQ'
+        const jwt = getToken()
         if (!jwt) {
-            throw new Error('token not found in LC')
+            console.error('token not found in LC');
+            return undefined;
         }
         decodedToken = decode(jwt);
     }

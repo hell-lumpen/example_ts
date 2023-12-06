@@ -1,12 +1,9 @@
-import {createContext, useContext} from "react";
-import {NotificationState} from "../models/NotificationModel";
+import React, {createContext, useContext} from "react";
+import {CustomNotification} from "../models/NotificationModel";
 
-export const NotificationContext = createContext<NotificationState | undefined>(undefined);
+export const NotificationContext = createContext<[CustomNotification | undefined, React.Dispatch<React.SetStateAction<CustomNotification | undefined>>]>([undefined, () => {
+}]);
 
 export function useNotificationState() {
-    const context = useContext(NotificationContext);
-    if (!context) {
-        throw new Error('NotificationContext must be used within a NotificationProvider');
-    }
-    return context;
+    return useContext(NotificationContext);
 }

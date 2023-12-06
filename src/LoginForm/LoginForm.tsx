@@ -1,10 +1,10 @@
-import React, {Dispatch, SetStateAction, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './LoginForm.module.css';
-import {AuthenticatedUser, UserCredentials} from "../models/AuthenticatedUser";
+import {UserCredentials} from "../models/AuthenticatedUser";
 import {login} from "../services/authService";
+import {useAuthenticatedUserState} from "../contexts/authenticatedUserContext";
 import {useNotificationState} from "../contexts/notificationContext";
 import {NotificationType} from "../models/NotificationModel";
-import {useAuthenticatedUserState} from "../contexts/authenticatedUserContext";
 
 
 interface LoginFormProps {
@@ -13,12 +13,13 @@ interface LoginFormProps {
 const LoginForm: React.FC<LoginFormProps> = () => {
     const [authenticatedUser, setAuthenticatedUser] = useAuthenticatedUserState();
 
-    const {setNotification} = useNotificationState();
     const [successAuth, setSuccessAuth] = useState(true);
     const [credentials, setCredentials] = useState<UserCredentials>({
         username: '',
         password: '',
     });
+
+    const [notification, setNotification] = useNotificationState();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSuccessAuth(true);
@@ -40,7 +41,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
             setNotification({
                 type: NotificationType.INFO,
                 title: 'Успешный вход',
-                message: ''
+                message: 'Подробное сообщение об успешном входе'
             });
         } catch (error: any) {
             setNotification({

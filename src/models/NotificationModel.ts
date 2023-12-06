@@ -1,5 +1,3 @@
-import React from "react";
-
 export enum NotificationType {
     INFO,
     WARNING,
@@ -7,13 +5,8 @@ export enum NotificationType {
     ERROR
 }
 
-export interface Notification {
-    type: NotificationType | undefined;
-    title: string | undefined;
-    message: string | undefined;
-}
-
-export interface NotificationState {
-    notification: Notification;
-    setNotification: React.Dispatch<React.SetStateAction<Notification>>;
+export interface CustomNotification {
+    type: NotificationType;
+    title: string;
+    message: string;
 }
